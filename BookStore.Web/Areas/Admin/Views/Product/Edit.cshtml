@@ -1,0 +1,143 @@
+﻿@model BookStore.Application.Contracts.Product.EditProduct
+
+<br />
+@{
+
+    ViewData["Title"] = $"Edit Product";
+    <h1>Edit Product </h1>
+
+
+
+}
+
+<hr />
+
+
+<form asp-action="Edit" method="post" enctype="multipart/form-data">
+    <div class="border p-3 mt-4 row">
+        <input asp-for="Id" hidden class="form-control" />
+        <input asp-for="ImageUrl" hidden class="form-control" />
+
+        <div class="mb-3">
+            <label asp-for="Title" class="control-label"></label>
+            <input asp-for="Title" class="form-control" />
+            <span asp-validation-for="Title" class="text-danger"></span>
+        </div>
+        <br />
+        <div class="mb-3">
+            <label asp-for="Description" class="control-label"></label>
+            <textarea asp-for="Description" rows=3 class="form-control"></textarea>
+            <span asp-validation-for="Description" class="text-danger"></span>
+        </div>
+        <br />
+        <div class="mb-3 col-6">
+            <label asp-for="ISBN" class="control-label"></label>
+            <input asp-for="ISBN" class="form-control" />
+            <span asp-validation-for="ISBN" class="text-danger"></span>
+        </div>
+        <br />
+        <div class="mb-3 col-6">
+            <label asp-for="Author" class="control-label"></label>
+            <input asp-for="Author" class="form-control" />
+            <span asp-validation-for="Author" class="text-danger"></span>
+        </div>
+        <br />
+        <div class="mb-3 col-6">
+            <label asp-for="ListPrice" class="control-label"></label>
+            <input asp-for="ListPrice" class="form-control" />
+            <span asp-validation-for="ListPrice" class="text-danger"></span>
+        </div>
+        <br />
+        <div class="mb-3 col-6">
+            <label asp-for="Price" class="control-label"></label>
+            <input asp-for="Price" class="form-control" />
+            <span asp-validation-for="Price" class="text-danger"></span>
+        </div>
+        <br />
+        <div class="mb-3 col-6">
+            <label asp-for="Price50" class="control-label"></label>
+            <input asp-for="Price50" class="form-control" />
+            <span asp-validation-for="Price50" class="text-danger"></span>
+        </div>
+        <br />
+        <div class="mb-3 col-6">
+            <label asp-for="Price100" class="control-label"></label>
+            <input asp-for="Price100" class="form-control" />
+            <span asp-validation-for="Price100" class="text-danger"></span>
+        </div>
+        <br />
+        <div class="mb-3">
+            <label class="control-label"> Image </label>
+            <input asp-for="Image" id="uploadBox" name="Image" type="file" class="form-control" />
+        </div>
+        <br />
+
+        <div class="mb-3 col-6">
+            <label class="control-label">Category</label>
+            <select asp-for="CategoryId" asp-items="@Model.CategoryList" class="form-control">
+                <option disabled selected>
+                    -- Select Category--
+
+                </option>
+            </select>
+            <span asp-validation-for="CategoryId" class="text-danger"></span>
+        </div>
+        <br />
+        <div class="mb-3 col-6">
+            <label class="control-label">CoverType</label>
+            <select asp-for="CoverTypeId" asp-items="@Model.CoverTypeList" class="form-control">
+                <option disabled selected>
+                    -- Select CoverType--
+
+                </option>
+            </select>
+            <span asp-validation-for="CategoryId" class="text-danger"></span>
+        </div>
+        <br />
+
+        <div class="col-6">
+
+            <button type="submit" onclick="return ValidateInput()" class="btn btn-primary" style="width:150px">Update</button>
+
+
+        </div>
+        <div class="col-6">
+            <a asp-action="Index" class="btn btn-secondary col-6">Back to List</a>
+        </div>
+    </div>
+</form>
+
+<br />
+<div>
+</div>
+@section Scripts{
+<partial name="_ValidationScriptsPartial" />
+<script>
+    tinymce.init({
+      selector: 'textarea',
+      plugins: 'advlist autolink lists link image charmap print preview hr anchor pagebreak',
+      toolbar_mode: 'floating',
+    });
+</script>
+<script>
+
+    function ValidateInput(){
+
+        if(document.getElementById("uploadBox").value =="")
+        {
+
+            Swal.fire({
+            icon: 'error',
+            title: 'Oops...',
+            text: 'Please Upload an Image!!',
+
+            })
+            return false;
+        }
+        return true;
+
+    }
+
+</script>
+
+}
